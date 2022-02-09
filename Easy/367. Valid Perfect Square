@@ -1,0 +1,19 @@
+class Solution {
+    public boolean isPerfectSquare(int num) {
+        long high=100000,low = 1,mid,sqr;
+        while(low<=high){
+            mid = low+(high-low)/2;
+            sqr = mid*mid;
+            if(sqr==num){
+                return true;
+            }
+            else if(sqr>num){
+                high = mid-1;
+            }
+            else{
+                low = mid+1;
+            }
+        }
+        return false;
+    }
+}
