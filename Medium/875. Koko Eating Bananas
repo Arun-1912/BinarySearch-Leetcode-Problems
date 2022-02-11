@@ -1,0 +1,36 @@
+class Solution {
+    public int minEatingSpeed(int[] piles, int h) {
+        long low = 1;
+        long high = piles[0];
+        
+        for(int i=1;i<piles.length;i++){
+            if(piles[i]>high){
+                high = piles[i];
+            }
+        }
+        System.out.println(high);
+        while(low<high){
+            long mid = low + (high-low)/2;
+            
+            if(!isPossibleToEatAll(piles,h,mid)){
+                low = mid+1;
+            }
+            else{
+                high = mid;
+            }
+        }
+        return (int)low;
+    }
+    
+    private boolean isPossibleToEatAll(int[] piles,int hours,long curK){
+        long count = 0;
+        
+        for(long pile:piles){
+            count += pile/curK;
+            if(pile % curK != 0){
+                count += 1;
+            }
+        }
+        return (count <= hours);
+    }
+}
